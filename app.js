@@ -13,12 +13,20 @@ require("dotenv").config();
 
 //setting Database
 mongoose.connect(
-  process.env.MONGO_URI,
+  'mongodb://localhost:27017/IEEECS_CCS',
   { useNewUrlParser: true, useFindAndModify: false },
   err => {
     if (!err) console.log("Connection successful");
   }
 );
+
+// mongoose.connect(
+//   process.env.MONGO_URI,
+//   { useNewUrlParser: true, useFindAndModify: false },
+//   err => {
+//     if (!err) console.log("Connection successful");
+//   }
+// );
 
 const usersRouter = require("./routes/users");
 const adminRouter = require("./routes/admin");
@@ -82,12 +90,12 @@ require("./config/passport")(passport);
 // });
 
 // catch 404 and forward to error handler
-app.use(function(req, res, next) {
+app.use(function (req, res, next) {
   next(createError(404));
 });
 
 // error handler
-app.use(function(err, req, res, next) {
+app.use(function (err, req, res, next) {
   console.log(err);
 
   // set locals, only providing error in development
@@ -95,7 +103,7 @@ app.use(function(err, req, res, next) {
   res.locals.error = req.app.get("env") === "development" ? err : {};
   // render the error page
   res.status(err.status || 500);
-  res.json({ success: false, msg: err });
+  res.json({ success: false, msg: err.message });
 });
 
 module.exports = app;

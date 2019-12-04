@@ -23,6 +23,10 @@ const applicantSchema = new mongoose.Schema({
     enum: ["male", "female", "other"],
     default: "other"
   },
+  compete: {
+    type: Boolean,
+    default: false
+  },
   domain: [String],
   response: [
     {

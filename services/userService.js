@@ -9,16 +9,23 @@ module.exports.setQuestions = async id => {
       var newDomain = domain[ii];
       var questions = [];
       questions = await Q_Database.find({ qDomain: newDomain }, "_id").lean();
-      var j, x, i;
-      for (i = questions.length - 1; i > 0; i--) {
-        j = Math.floor(Math.random() * (i + 1));
-        x = questions[i];
-        questions[i] = questions[j];
-        questions[j] = x;
+      var Oque = [], Sque = [];
+      for (var i = 0; i < questions.length; i++) {
+        if (questions[i].qtype === "Subjective") {
+          Sque.push(questions[i]);
+        }
+        else {
+          Oque.push(questions[i]);
+        }
       }
-      questions = questions.splice(0, 10);
-      console.log(questions);
-      fArray.push.apply(fArray, questions);
+      var resultque = []
+      if (newDomain !== "documentation") {
+
+      }
+      else {
+
+      }
+      fArray.push.apply(fArray, resultque);
     }
     return fArray;
   } catch (error) {
