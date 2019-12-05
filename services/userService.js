@@ -1,29 +1,46 @@
 const Q_Database = require("../models/question");
 const A_Database = require("../models/applicant");
 module.exports.setQuestions = async id => {
+  // console.log(id);
   try {
     var domain = await A_Database.findById(id, "domain");
     domain = domain.domain;
     var fArray = [];
     for (var ii = 0; ii < domain.length; ii++) {
       var newDomain = domain[ii];
-      var questions = [];
-      questions = await Q_Database.find({ qDomain: newDomain }, "_id").lean();
-      var Oque = [], Sque = [];
-      for (var i = 0; i < questions.length; i++) {
-        if (questions[i].qtype === "Subjective") {
-          Sque.push(questions[i]);
-        }
-        else {
-          Oque.push(questions[i]);
-        }
-      }
+      Sque = await Q_Database.find({ qDomain: newDomain, qType: "Subjective" }, { "_id": 1 }).lean();
+      Oque = await Q_Database.find({ qDomain: newDomain, qType: "Objective" }, { "_id": 1 }).lean();
+      // console.log(questions);
+      // console.log(Sque.length);
+      // console.log(Oque.length);
       var resultque = []
       if (newDomain !== "documentation") {
-
+        for (var i = Sque.length - 1; i > 0; i--) {
+          var index = Math.floor(Math.random() * (i + 1))
+          var temp = Sque[i];
+          Sque[i] = Sque[index];
+          Sque[index] = temp;
+        }
+        Sque = Sque.splice(5);
+        resultque.push.apply(resultque, Sque);
+        for (var i = Oque.length - 1; i > 0; i--) {
+          var index = Math.floor(Math.random() * (i + 1))
+          var temp = Oque[i];
+          Oque[i] = Oque[index];
+          Oque[index] = temp;
+        }
+        Oque = Oque.splice(5);
+        resultque.push.apply(resultque, Oque);
       }
       else {
-
+        for (var i = Sque.length - 1; i > 0; i--) {
+          var index = Math.floor(Math.random() * (i + 1))
+          var temp = Sque[i];
+          Sque[i] = Sque[index];
+          Sque[index] = temp;
+        }
+        Sque = Sque.splice(5); // No of question is 5 for documentation
+        resultque.push.apply(resultque, Sque);
       }
       fArray.push.apply(fArray, resultque);
     }

@@ -59,6 +59,36 @@ router.get("/register", (req, res) => {
   res.render("register", { message: "" });
 });
 
+//post questions route
+// router.post("/questions", async (req, res, next) => {
+//   // var question = JSON.parse(req.body);
+//   console.log(req.body);
+//   await Q_Database.create(req.body);
+//   res.end();
+// })
+
+// user routes test
+
+// router.get("/userDomain/:id", async (req, res, next) => {
+//   domain = ["management"];
+//   await A_Database.findByIdAndUpdate(req.params.id, {
+//     domain: domain,
+//   });
+//   var stuff = await userService.setQuestions(req.params.id);
+//   let questions = stuff.map(question => {
+//     return {
+//       questionId: question._id,
+//       userSolution: ""
+//     };
+//   });
+//   await A_Database.findByIdAndUpdate(req.params.id, {
+//     response: questions,
+//     attempted: true
+//   });
+//   console.log(stuff);
+//   res.end();
+// })
+
 // router.post("/register", async (req, res, next) => {
 //   const options = {
 //     method: "POST",
@@ -194,6 +224,7 @@ router.post("/domain", auth.isUser, auth.isAttempt, async (req, res, next) => {
   }
 });
 
+
 router.get("/question", auth.isUser, auth.isAttempt, async (req, res, next) => {
   try {
     // req.logout();
@@ -213,7 +244,7 @@ router.get("/question", auth.isUser, auth.isAttempt, async (req, res, next) => {
     const data = await A_Database.find(
       { _id: req.user.id },
       "response domain maxTime"
-    ).populate("response.questionId", "question qDomain");
+    ).populate("response.questionId", "question qDomain qType");
     console.log(data[0]);
 
     res.render("quiz", { data: data[0] });
