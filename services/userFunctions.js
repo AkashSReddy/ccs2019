@@ -45,6 +45,7 @@ module.exports.addUser = async userDetails => {
     newUser.regno = userDetails.regno;
     newUser.phone = userDetails.phone;
     newUser.gender = userDetails.gender;
+    newUser.compete = userDetails.compete;
     newUser.password = newUser.generateHash(userDetails.password);
     console.log("password hashed");
 

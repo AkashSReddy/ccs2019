@@ -3,6 +3,11 @@ var router = express.Router();
 const auth = require("../middleware/authentication");
 var adminService = require("../services/adminService");
 var A_Database = require("../models/applicant");
+var stringify = require("csv-stringify");
+var fs = require("fs");
+var userFunctions = require("../services/userFunctions");
+const path = require("path");
+const eventCsvPath = path.join(__dirname,"event.csv")
 /* GET home page. */
 
 router.get("/logout", (req, res) => {
@@ -21,6 +26,55 @@ router.get("/", async (req, res, next) => {
     return next(error);
   }
 });
+
+router.get("/getcompusers", async(req,res,next) => {
+  try{
+    // var event = [];
+    var compUser = await A_Database.find({compete: true});
+    //console.log(compUser);
+    let columns = {
+      name: "name",
+      email: "email",
+      regno: "regno",
+      phone: "phone",
+      compete: "compete",
+      gender: "gender"
+    }
+    let stuff = compUser.map(currentUser => {
+      return{
+        name: currentUser.name,
+        email: currentUser.email,
+        regno: currentUser.regno,
+        phone: currentUser.phone,
+        compete: currentUser.compete,
+        gender: currentUser.gender
+      };
+    });
+    console.log(stuff);
+    stringify(stuff, { header: true, columns: columns }, (err, output) => {
+      if (err) throw err;
+      fs.writeFile("event.csv", output, err => {
+        if (err) throw err;
+        console.log("event.csv saved.");
+      });
+    });
+    return res.download("event.csv");
+  } catch(error) {
+    return next(error);
+  }
+})
+
+// //test route for getcompusers
+// router.post("/createcompusers", async(req,res,next) => {
+//   try{
+//     let message = await userFunctions.addUser(req.body)
+//       if(message == "ok")
+//         return res.redirect("/");
+//   } catch(err) {
+//     if(err)
+//       throw(err);
+//   }
+// })
 
 router.get("/userdata/:idd", async (req, res, next) => {
   try {

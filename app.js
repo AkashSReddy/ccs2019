@@ -14,7 +14,7 @@ require("dotenv").config();
 //setting Database
 mongoose.connect(
   'mongodb://localhost:27017/IEEECS_CCS',
-  { useNewUrlParser: true, useFindAndModify: false },
+  { useNewUrlParser: true, useFindAndModify: false , useUnifiedTopology: true},
   err => {
     if (!err) console.log("Connection successful");
   }
