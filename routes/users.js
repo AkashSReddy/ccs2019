@@ -67,6 +67,37 @@ router.get("/register", (req, res) => {
 //   res.end();
 // })
 
+// get question from csv file
+
+// router.get("/postquestions", async (req, res) => {
+//   var csvtojson = require("csvtojson");
+//   const csvFilePath = require('path').join(__dirname + "../../../book1.csv");
+//   let jsonArray = await csvtojson().fromFile(csvFilePath);
+//   // console.log(jsonArray);
+//   let stuff = jsonArray.map(data => {
+//     var options = [];
+//     if (data.qType === "Objective") {
+//       options.push(data.options1);
+//       options.push(data.options2);
+//       options.push(data.options3);
+//       options.push(data.options4);
+//     }
+//     return {
+//       options: options,
+//       question: data.question,
+//       qid: data.qid,
+//       qDomain: data.qDomain,
+//       qType: data.qType,
+//       answer: data.answer
+//     }
+//   })
+//   // console.log(stuff);
+//   let result = await Q_Database.insertMany(stuff);
+//   res.send('OK');
+//   res.end();
+//   // console.log(require('path').join(__dirname + "../../../"));
+// })
+
 // user routes test
 
 // router.get("/userDomain/:id", async (req, res, next) => {
