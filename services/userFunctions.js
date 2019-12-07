@@ -25,7 +25,7 @@ module.exports.addUser = async userDetails => {
       $or: [{ regno: userDetails.regno }, { email: userDetails.email }]
     })
 
-    console.log("query success");
+    // console.log("query success");
     console.log(user);
 
     if (user) {

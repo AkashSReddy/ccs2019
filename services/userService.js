@@ -81,7 +81,7 @@ module.exports.validate = userDetails => {
     var phone = userDetails.phone;
     var name = userDetails.name;
     phone = phone.length;
-    var password = userDetails.password;
+    var password = userDetails.Password;
     password = password.length;
     var message = "ok";
     console.log("inside validate");

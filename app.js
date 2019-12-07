@@ -12,21 +12,21 @@ const flash = require("connect-flash");
 require("dotenv").config();
 
 //setting Database
-// mongoose.connect(
-//   'mongodb://localhost:27017/IEEECS_CCS',
-//   { useNewUrlParser: true, useFindAndModify: false , useUnifiedTopology: true},
-//   err => {
-//     if (!err) console.log("Connection successful");
-//   }
-// );
-
 mongoose.connect(
-  process.env.MONGO_URI,
-  { useNewUrlParser: true, useFindAndModify: false },
+  'mongodb://localhost:27017/IEEECS_CCS',
+  { useNewUrlParser: true, useFindAndModify: false, useUnifiedTopology: true },
   err => {
     if (!err) console.log("Connection successful");
   }
 );
+
+// mongoose.connect(
+//   process.env.MONGO_URI,
+//   { useNewUrlParser: true, useFindAndModify: false },
+//   err => {
+//     if (!err) console.log("Connection successful");
+//   }
+// );
 
 const usersRouter = require("./routes/users");
 const adminRouter = require("./routes/admin");
@@ -90,12 +90,12 @@ require("./config/passport")(passport);
 // });
 
 // catch 404 and forward to error handler
-app.use(function(req, res, next) {
+app.use(function (req, res, next) {
   next(createError(404));
 });
 
 // error handler
-app.use(function(err, req, res, next) {
+app.use(function (err, req, res, next) {
   console.log(err);
 
   // set locals, only providing error in development
