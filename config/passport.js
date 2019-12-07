@@ -44,6 +44,7 @@ module.exports = passport => {
                   req.flash("message", "User not found")
                 );
               }
+              console.log(bcrypt.compareSync(password, user.password))
               if (!bcrypt.compareSync(password, user.password)) {
                 console.log("wrong pass");
                 return done(

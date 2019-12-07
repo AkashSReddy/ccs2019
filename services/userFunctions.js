@@ -46,7 +46,7 @@ module.exports.addUser = async userDetails => {
     newUser.phone = userDetails.phone;
     newUser.gender = userDetails.gender;
     newUser.compete = userDetails.compete;
-    newUser.password = newUser.generateHash(userDetails.password);
+    newUser.password = newUser.generateHash(userDetails.Password);
     console.log("password hashed");
 
     let savedUser = await newUser.save();
