@@ -157,7 +157,7 @@ router.post("/register", async (req, res, next) => {
   } catch (err) {
     next(err);
   }
-})
+});
 
 router.get("/user-role", auth.isLoggedIn, (req, res, next) => {
   try {
@@ -254,7 +254,6 @@ router.post("/domain", auth.isUser, auth.isAttempt, async (req, res, next) => {
     return next(error);
   }
 });
-
 
 router.get("/question", auth.isUser, auth.isAttempt, async (req, res, next) => {
   try {

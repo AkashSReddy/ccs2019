@@ -2,130 +2,238 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
+    <meta name="author" content="Aditya Menon" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
     <title>IEEECS | Selections</title>
+    <link rel="stylesheet" href="/stylesheets/style.css" />
+    <link rel="icon" type="image/png" href="images/logoicon.png" />
     <link
       href="https://fonts.googleapis.com/css?family=Poppins:400,600,700"
       rel="stylesheet"
     />
     <link
+      href="https://fonts.googleapis.com/css?family=Montserrat"
       rel="stylesheet"
-      href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css"
     />
-    <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
-    <!-- <link rel="stylesheet" href="/node_modules/sal.js/dist/sal.css "> -->
-    <link rel="icon" href="images/logoicon.png" />
-    <link rel="stylesheet" href="/stylesheets/register.css" />
-    <link rel="stylesheet" href="/stylesheets/login.css" />
   </head>
-
   <body>
-    <!--
-      <div class="preloader-wrapper active">
-        <div class="spinner-layer spinner-red-only">
-          <div class="circle-clipper left">
-            <div class="circle"></div>
-          </div>
-          <div class="gap-patch">
-            <div class="circle"></div>
-          </div>
-          <div class="circle-clipper right">
-            <div class="circle"></div>
+    <!-- partial:index.partial.html -->
+    <div class="row" style="text-align: center;">
+      <img src="images/ieeecsnew.png" id="mainlogo" />
+    </div>
+    <br />
+    <!-- <table>
+    <tr> -->
+    <!-- <td id="leftcell"> -->
+    <div class="outer">
+      <div class="mycontainer">
+        <div style="text-align: center;">
+          <h2 class="Lheading">Core Committee Selections</h2>
+        </div>
+        <br /><br />
+
+        <div class="left">
+          <object
+            type="image/svg+xml"
+            id="vector"
+            data="images/illustration.svg"
+          >
+            Your browser does not support SVG
+          </object>
+        </div>
+        <!-- </td> -->
+        <!-- <td id="midcell"></td> -->
+        <!-- <td id="rightcell"> -->
+        <div class="right">
+          <div class="container">
+            <!-- <div class="box"></div> -->
+            <div class="container-forms">
+              <div class="container-info">
+                <div class="info-item">
+                  <div class="table">
+                    <div class="table-cell">
+                      <p>
+                        Have an account?
+                      </p>
+                      <div class="btn">
+                        Log in
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="info-item">
+                  <div class="table">
+                    <div class="table-cell">
+                      <p>
+                        Don't have an account?
+                      </p>
+                      <div class="btn">
+                        Sign up
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="container-form">
+                <div class="form-item log-in">
+                  <div class="table">
+                    <!-- <form action="" method="POST"> -->
+                    <div class="table-cell">
+                      <form action="/login" method="POST">
+                        <input
+                          id="regno"
+                          type="text"
+                          name="regno"
+                          pattern="(19|18|17)[A-Z]{3}[0-9]{4}$"
+                          required
+                        />
+                        <input
+                          id="pwd"
+                          type="password"
+                          name="password"
+                          required
+                        />
+                        <button
+                          style="z-index:100;border:none; height:100%; width:100%; background-color: #faa41a;color: #333333;padding:10px 13px 10px 13px;width: 180px; margin: auto;border-radius:100px;"
+                        >
+                          Submit
+                        </button>
+                      </form>
+                      <!-- </form> -->
+                    </div>
+                  </div>
+                </div>
+                <div class="form-item sign-up">
+                  <div class="table">
+                    <div class="table-cell">
+                      <form action="/register" method="POST" name="reg_form">
+                        <input
+                          name="email"
+                          placeholder="Email"
+                          type="text"
+                          required
+                        /><input
+                          name="name"
+                          placeholder="Name"
+                          type="text"
+                          pattern="[a-zA-Z][a-zA-Z ]+[a-zA-Z]$"
+                          required
+                        /><input
+                          name="regno"
+                          placeholder="Register Number"
+                          type="text"
+                          pattern="19[A-Z]{3}[0-9]{3}[0-9]$"
+                          required
+                        /><input
+                          name="Password"
+                          placeholder="Password"
+                          type="Password"
+                          pattern="(?=^.{8,}$)((?=.*\d)|(?=.*\W+))(?![.\n])(?=.*[A-Z])(?=.*[a-z]).*$"
+                          required
+                        />
+                        <!-- <span class="helper-text">Minimum 8 characters. Must contain a Special character, a
+                        Digit and Upper & Lowercase letters.</span> -->
+                        <input
+                          name="phone"
+                          placeholder="Phone Number"
+                          type="number"
+                          pattern="[0-9]{9}[0-9]$"
+                          required
+                        />
+                        <ul>
+                          <li>&nbsp;&nbsp;&nbsp;&nbsp;</li>
+                          <li>
+                            <input
+                              type="radio"
+                              name="gender"
+                              value="male"
+                              class="gender"
+                              style="width:unset;float: left"
+                              checked
+                            />
+                          </li>
+                          <li>Male</li>
+                          <li>
+                            <input
+                              class="gender"
+                              type="radio"
+                              name="gender"
+                              value="female"
+                              style="width:unset;float: left"
+                            />
+                          </li>
+                          <li>
+                            Female
+                          </li>
+                        </ul>
+                        <br />
+                        <!-- <ul class="gen">
+                          <li><p class="gen">
+                            <label>
+                              <input name="gender" type="radio" value="male" class="txt"/>
+                              <span class="txt">Male</span>
+                            </label>
+                            </p>
+                          </li>
+                          <li>
+                            <p class="gen">
+                              <label>
+                                  <input name="gender" value="female" type="radio"/>
+                              <span class="txt">Female</span>
+                              </label>
+                            </p>
+                          </li>
+                        </ul> -->
+                        <!-- <div class="btn"> -->
+                        <button
+                          style="z-index:100;border:none; height:100%; width:100%; background-color: #faa41a;color: #333333;padding:10px 13px 10px 13px;width: 180px; margin: auto;border-radius:100px;"
+                        >
+                          Submit
+                        </button>
+                        <!-- </div> -->
+                        <!-- <button class="btn">Submit</button> -->
+                      </form>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
           </div>
         </div>
       </div>
-    -->
-
-    <div id="cover"></div>
-    <script>
-      $(window).on("load", function() {
-        $("#cover").fadeOut(200);
-      });
-    </script>
-
-    <div class="container">
-      <div class="row">
-        <div class="col12 top">
-          <img src="/images/IEEE-CS_New.png" alt="logo" class="logo" />
+      <!-- </td>
+  </tr>
+</table> -->
+      <div class="container" id="phone" style="text-align: center;">
+        <div style="text-align: center;">
+          <h2 class="Lheading">Core Committee Selections</h2>
         </div>
-      </div>
-      <div
-        class="row"
-        data-sal-duration="500"
-        data-sal="fade"
-        data-sal-delay="300"
-        data-sal-easing="ease-in"
-      >
-        <div class="col s7 s12 m12 l7 sect1">
-          <div class="right-inner">
-            <h4 class="heading">Core Comittee Selections</h4>
-            <img
-              src="/images/illustration.svg"
-              alt="illustration"
-              class="illustration"
-            />
-            <p id="login-web">
-              Haven't registered? Register
-              <a href="/register" class="login-here">here</a>
-            </p>
+        <div class="row">
+          <div class="phone_login">
+            <h2 class="Sheading">Login</h2>
+            <form action="" method="POST">
+              <input name="Username" placeholder="Register Number" />
+              <input name="Password" placeholder="Password" />
+              <br />
+              <button
+                style="z-index:100;border:none; height:100%; width:100%; background-color: #faa41a;color: #333333;padding:10px 13px 10px 13px;width: 180px; margin: auto;border-radius:100px;"
+              >
+                Submit
+              </button>
+            </form>
+            <br />
+            <br />
+            <br />
+            <h4 style="color: white" id="reglink">
+              Not Registered? Click <a href="/register">Here</a>
+            </h4>
           </div>
-        </div>
-        <div class="col s5 s12 m12 l5 sect2">
-          <form action="/login" method="POST">
-            <h4 class="form-heading">Login</h4>
-            <ul class="">
-              <li class="input-field">
-                <label for="regno">Registration No.</label>
-                <input
-                  class="validate"
-                  id="regno"
-                  type="text"
-                  name="regno"
-                  pattern="(18|17|16)[A-Z]{3}[0-9]{4}$"
-                  required
-                />
-              </li>
-              <li class="input-field">
-                <label for="pwd">Password</label>
-                <input
-                  id="pwd"
-                  class="validate"
-                  type="password"
-                  name="password"
-                  required
-                />
-              </li>
-              <p style="color:red;font-size:13px;text-align:center;">
-                <%=message%>
-              </p>
-              <li class="button-placement custom-button">
-                <button
-                  type="submit"
-                  class="waves-effect waves btn-flat"
-                  value="Submit"
-                >
-                  SUBMIT
-                </button>
-              </li>
-            </ul>
-          </form>
-          <p style="color:white; text-align:center" id="login-mobile">
-            Haven't registered? Register
-            <a href="/register" class="login-here">here</a>
-          </p>
         </div>
       </div>
     </div>
-    <!--
-      <script src="/node_modules/sal.js/dist/sal.js">
-      </script>
-      <script>
-        sal({
-          once: true
-        });
-      </script>
-    -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+
+    <!-- partial -->
+    <script src="https://code.jquery.com/jquery-2.2.4.min.js"></script>
+    <script src="/scripts/script.js"></script>
   </body>
 </html>
