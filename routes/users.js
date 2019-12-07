@@ -152,7 +152,8 @@ router.get("/register", (req, res) => {
 router.post("/register", async (req, res, next) => {
   try {
     let message = await userFunctions.addUser(req.body);
-    console.log(req.body);
+    // console.log(req.body);
+    console.log(message)
     if (message === "ok") return res.redirect("/");
     return res.render("register", { message: message });
   } catch (err) {
