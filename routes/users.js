@@ -231,9 +231,9 @@ router.get("/question", auth.isUser, async (req, res, next) => {
     const data = await A_Database.find(
       { _id: req.user.id },
       "response domain maxTime"
-    ).populate("response.questionId", "question qDomain qType");
+    ).populate("response.questionId", "question qDomain qType options");
     console.log(data[0]);
-
+    return res.json(data[0])
     res.render("quiz", { data: data[0] });
   } catch (error) {
     return next(error);
