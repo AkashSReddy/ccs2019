@@ -27,7 +27,7 @@ module.exports.setQuestions = async id => {
           Sque[i] = Sque[index];
           Sque[index] = temp;
         }
-        Sque = Sque.slice(0, 5);
+        Sque = Sque.slice(0, 7);
         resultque.push.apply(resultque, Sque);
         for (var i = Oque.length - 1; i > 0; i--) {
           var index = Math.floor(Math.random() * (i + 1));
@@ -35,7 +35,7 @@ module.exports.setQuestions = async id => {
           Oque[i] = Oque[index];
           Oque[index] = temp;
         }
-        Oque = Oque.slice(0, 5);
+        Oque = Oque.slice(0, 3);
         resultque.push.apply(resultque, Oque);
       } else {
         for (var i = Sque.length - 1; i > 0; i--) {
@@ -44,7 +44,7 @@ module.exports.setQuestions = async id => {
           Sque[i] = Sque[index];
           Sque[index] = temp;
         }
-        Sque = Sque.slice(0, 5); // No of question is 5 for documentation
+        Sque = Sque.slice(0, 4); // No of question is 5 for documentation
         resultque.push.apply(resultque, Sque);
       }
       fArray.push.apply(fArray, resultque);

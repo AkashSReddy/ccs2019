@@ -40,7 +40,8 @@ router.get("/register", (req, res) => {
 
 // router.get("/postquestions", async (req, res) => {
 //   var csvtojson = require("csvtojson");
-//   const csvFilePath = require('path').join(__dirname + "../../../book1.csv");
+//   const csvFilePath = require('path').join(__dirname + "/book1.csv");
+//   console.log(csvFilePath)
 //   let jsonArray = await csvtojson().fromFile(csvFilePath);
 //   // console.log(jsonArray);
 //   let stuff = jsonArray.map(data => {
@@ -68,46 +69,50 @@ router.get("/register", (req, res) => {
 // })
 
 
-// router.post("/register", async (req, res, next) => {
-//   const options = {
-//     method: "POST",
-//     uri: "https://www.google.com/recaptcha/api/siteverify",
-//     formData: {
-//       secret: process.env.RECAPTCHA_SECRET,
-//       response: req.body["g-recaptcha-response"]
-//     }
-//   };
-//   request(options)
-//     .then(response => {
-//       let cResponse = JSON.parse(response);
-//       if (!cResponse.success) {
-//         return res.render("register", { message: "Invalid Captcha" });
-//       }
-//       return userFunctions
-//         .addUser(req.body)
-//         .then(function (message) {
-//           if (message === "ok") return res.redirect("/");
-//           return res.render("register", { message: message });
-//         })
-//         .catch(err => {
-//           console.log(err);
-//           next(err);
-//         });
-//     })
-//     .catch(err => next(err));
-// });
+//Register with recaptcha
 
 router.post("/register", async (req, res, next) => {
-  try {
-    let message = await userFunctions.addUser(req.body);
-    // console.log(req.body);
-    console.log(message)
-    if (message === "ok") return res.render("index", { message: "ok" });
-    return res.render("index", { message: message });
-  } catch (err) {
-    next(err);
-  }
+  const options = {
+    method: "POST",
+    uri: "https://www.google.com/recaptcha/api/siteverify",
+    formData: {
+      secret: process.env.RECAPTCHA_SECRET,
+      response: req.body["g-recaptcha-response"]
+    }
+  };
+  request(options)
+    .then(response => {
+      let cResponse = JSON.parse(response);
+      if (!cResponse.success) {
+        return res.render("register", { message: "Invalid Captcha" });
+      }
+      return userFunctions
+        .addUser(req.body)
+        .then(function (message) {
+          if (message === "ok") return res.redirect("/");
+          return res.render("register", { message: message });
+        })
+        .catch(err => {
+          console.log(err);
+          next(err);
+        });
+    })
+    .catch(err => next(err));
 });
+
+//Register without recaptcha
+
+// router.post("/register", async (req, res, next) => {
+//   try {
+//     let message = await userFunctions.addUser(req.body);
+//     // console.log(req.body);
+//     console.log(message)
+//     if (message === "ok") return res.render("index", { message: "ok" });
+//     return res.render("index", { message: message });
+//   } catch (err) {
+//     next(err);
+//   }
+// });
 
 router.get("/user-role", auth.isLoggedIn, (req, res, next) => {
   try {
