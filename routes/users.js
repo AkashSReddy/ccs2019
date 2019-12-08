@@ -67,27 +67,6 @@ router.get("/register", (req, res) => {
 //   // console.log(require('path').join(__dirname + "../../../"));
 // })
 
-// user routes test
-
-// router.get("/userDomain/:id", async (req, res, next) => {
-//   domain = ["management"];
-//   await A_Database.findByIdAndUpdate(req.params.id, {
-//     domain: domain,
-//   });
-//   var stuff = await userService.setQuestions(req.params.id);
-//   let questions = stuff.map(question => {
-//     return {
-//       questionId: question._id,
-//       userSolution: ""
-//     };
-//   });
-//   await A_Database.findByIdAndUpdate(req.params.id, {
-//     response: questions,
-//     attempted: true
-//   });
-//   console.log(stuff);
-//   res.end();
-// })
 
 // router.post("/register", async (req, res, next) => {
 //   const options = {
@@ -279,7 +258,6 @@ router.post("/question", auth.isUser, auth.isSubmit, async (req, res, next) => {
     user.submitted = true;
     user.endTime = endTime;
     await user.save();
-
     await userService.timeStatus(req.user.id);
     res.json({ success: true });
   } catch (error) {
