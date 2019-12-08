@@ -2,6 +2,17 @@ html {
   font-family: "Poppins", sans-serif;
   list-style: none;
 }
+/* @keyframes animatedBackground {
+  from { background-position: 0 0; }
+  to { background-position: 100% 0; }
+} */
+body{
+background-image: url('../images/line_pattern.png');
+background-position: 0px 0px;
+background-repeat: repeat-x;
+animation: animatedBackground 30s linear infinite;
+}
+
 
 .custom-logo {
   width: 35%;
