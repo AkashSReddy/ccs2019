@@ -213,7 +213,8 @@ router.post("/domain", auth.isUser, auth.isAttempt, async (req, res, next) => {
   }
 });
 
-router.get("/question", auth.isUser, auth.isAttempt, async (req, res, next) => {
+//ADD auth.isAttempt To this route
+router.get("/question", auth.isUser, async (req, res, next) => {
   try {
     var stuff = await userService.setQuestions(req.user.id);
 
