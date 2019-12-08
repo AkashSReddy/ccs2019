@@ -15,8 +15,13 @@
       href="https://fonts.googleapis.com/css?family=Montserrat"
       rel="stylesheet"
     />
+    <style>
+    .swal-button {
+      background-color: #faa41a !important;
+    }
+    </style>
   </head>
-  <body>
+  <body onload="check()">
     <!-- partial:index.partial.html -->
     <div class="row" style="text-align: center;">
       <img src="images/ieeecsnew.png" id="mainlogo" />
@@ -51,7 +56,7 @@
               <div class="container-info">
                 <div class="info-item">
                   <div class="table">
-                    <div class="table-cell">
+                    <div class="table-cell" >
                       <p>
                         Have an account?
                       </p>
@@ -63,7 +68,7 @@
                 </div>
                 <div class="info-item">
                   <div class="table">
-                    <div class="table-cell">
+                    <div class="table-cell" >
                       <p>
                         Don't have an account?
                       </p>
@@ -79,18 +84,22 @@
                   <div class="table">
                     <!-- <form action="" method="POST"> -->
                     <div class="table-cell">
-                      <form action="/login" method="POST">
+                      <form autocomplete="off" action="/login" method="POST">
                         <input
                           id="regno"
                           type="text"
                           name="regno"
+                          placeholder="Reg. No."
                           pattern="(19|18|17)[A-Z]{3}[0-9]{4}$"
+                          autocomplete="off"
                           required
                         />
                         <input
                           id="pwd"
                           type="password"
                           name="password"
+                          placeholder="Password"
+                          autocomplete="off"
                           required
                         />
                         <button
@@ -105,32 +114,40 @@
                 </div>
                 <div class="form-item sign-up">
                   <div class="table">
-                    <div class="table-cell">
-                      <form action="/register" method="POST" name="reg_form">
+                    <div class="table-cell" style="padding: 20px;">
+                      <form autocomplete="off" action="/register" method="POST" name="reg_form">
+                        <input autocomplete="false" name="hidden" type="text" style="display:none;">
                         <input
-                          name="email"
-                          placeholder="Email"
-                          type="text"
-                          required
-                        /><input
                           name="name"
                           placeholder="Name"
                           type="text"
                           pattern="[a-zA-Z][a-zA-Z ]+[a-zA-Z]$"
+                          autocomplete="off"
                           required
-                        /><input
-                          name="regno"
-                          placeholder="Register Number"
+                        /> <input
+                        name="regno"
+                        placeholder="Reg. No."
+                        type="text"
+                        pattern="19[A-Z]{3}[0-9]{3}[0-9]$"
+                        autocomplete="off"
+                        required
+                      /><input
+                          name="email"
+                          placeholder="Email"
                           type="text"
-                          pattern="19[A-Z]{3}[0-9]{3}[0-9]$"
+                          autocomplete="off"
                           required
                         /><input
-                          name="Password"
-                          placeholder="Password"
-                          type="Password"
-                          pattern="(?=^.{8,}$)((?=.*\d)|(?=.*\W+))(?![.\n])(?=.*[A-Z])(?=.*[a-z]).*$"
-                          required
-                        />
+                        name="Password"
+                        placeholder="Password"
+                        type="Password"
+                        pattern="(?=^.{8,}$)((?=.*\d)|(?=.*\W+))(?![.\n])(?=.*[A-Z])(?=.*[a-z]).*$"
+                        autocomplete="off"
+                        required
+                        title="Minimum 8 characters. Must contain a Special character, a
+                        Digit and Upper & Lowercase letters."
+                      />
+                       
                         <!-- <span class="helper-text">Minimum 8 characters. Must contain a Special character, a
                         Digit and Upper & Lowercase letters.</span> -->
                         <input
@@ -138,6 +155,7 @@
                           placeholder="Phone Number"
                           type="number"
                           pattern="[0-9]{9}[0-9]$"
+                          autocomplete="off"
                           required
                         />
                         <ul>
@@ -211,10 +229,24 @@
         <div class="row">
           <div class="phone_login">
             <h2 class="Sheading">Login</h2>
-            <form action="" method="POST">
-              <input name="Username" placeholder="Register Number" />
-              <input name="Password" placeholder="Password" />
-              <br />
+            <form autocomplete="off" action="/login" method="POST">
+              <input
+                id="regno1"
+                type="text"
+                name="regno"
+                placeholder="Reg. No."
+                pattern="(19|18|17)[A-Z]{3}[0-9]{4}$"
+                autocomplete="off"
+                required
+              />
+              <input
+                id="pwd1"
+                type="password"
+                name="password"
+                placeholder="Password"
+                autocomplete="off"
+                required
+              />
               <button
                 style="z-index:100;border:none; height:100%; width:100%; background-color: #faa41a;color: #333333;padding:10px 13px 10px 13px;width: 180px; margin: auto;border-radius:100px;"
               >
@@ -222,16 +254,38 @@
               </button>
             </form>
             <br />
-            <br />
-            <br />
             <h4 style="color: white" id="reglink">
               Not Registered? Click <a href="/register">Here</a>
             </h4>
           </div>
         </div>
       </div>
-    </div>
 
+      <div class="g-recaptcha" data-sitekey="6Leu6n8UAAAAAE33Fo9VhAe4f3QJ7YRrU7L63194" data-size="invisible"
+              data-callback="setResponse"></div>
+    </div>
+    <script src="https://www.google.com/recaptcha/api.js?render=6Leu6n8UAAAAAE33Fo9VhAe4f3QJ7YRrU7L63194"></script>
+<script>
+grecaptcha.ready(function() {
+    grecaptcha.execute('6Leu6n8UAAAAAE33Fo9VhAe4f3QJ7YRrU7L63194', {action: 'homepage'}).then(function(token) {
+       
+    });
+});
+</script>
+    
+    
+    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+        <script>
+          function check(){
+            if("<%=message%>"){
+            if("<%=message%>"!="ok"){
+              swal("Oops!", "<%= message %>", "error");
+            }
+            else{
+              swal("Successfully Registered", "One Step Closer!!", "success");
+            }}
+          }
+        </script>
     <!-- partial -->
     <script src="https://code.jquery.com/jquery-2.2.4.min.js"></script>
     <script src="/scripts/script.js"></script>
