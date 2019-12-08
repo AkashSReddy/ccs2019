@@ -56,6 +56,7 @@
             </li>
             <li class="tab"><a href="#management_tab">Management</a></li>
             <li class="tab"><a href="#design_tab">Design</a></li>
+            <li class="tab"><a href="#documentation_tab">Documentation</a></li>
           </ul>
         </div>
       </nav>
@@ -71,15 +72,16 @@
       <li><a onclick="submit()" style="color:white">Submit</a></li> -->
       <!-- <li><a href="/logout" style="color:white">Logout</a></li> -->
     </ul>
-    <% var count=0%> <% var t_count=0; %> <% var m_count=0; %> <% var d_count=0; %>
+    <% var count=0%><% var ocount=0%> <% var t_count=0; %> <% var m_count=0; %> <% var d_count=0; %> <% var doc_count=0; %>
     <div id="technical_tab" class="col s12">
       <div class="box tech-q">
         <% data.response.forEach((obj) => { %> 
           <% if(obj.questionId.qDomain == "technical") { %>
         <div class="question">
-          <% t_count++; count++; %> 
+          <% t_count++;  %> 
           <% if(obj.questionId.qType == "Subjective") { %>
             <!-- <div class="subj-question"> -->
+              <% count++; %>
               <div class="repeated">
                 <h5>Question <%=t_count%></h5>
                 <p class="q"><%= obj.questionId.question %></p>
@@ -96,34 +98,35 @@
             <!-- </div> -->
             <% } %>
             <% if(obj.questionId.qType == "Objective") { %>
+              <% ocount++; %>
               <div class="mcq-question">
                   <div class="repeated">
                     <h5>ObjQuestion <%=t_count%></h5>
                     <p class="q"><%= obj.questionId.question %></p>
-                    <p id="qid<%=count%>" style="display:none">
+                    <p id="oqid<%=ocount%>" style="display:none">
                       <%=obj.questionId._id%>
                     </p>
                       <p>
                         <label>
-                            <input type="radio"  />
+                            <input  value="<%= obj.questionId.options[0] %>" name="oq<%=ocount%>" type="radio"  />
                             <span><%= obj.questionId.options[0] %></span>
                         </label>
                       </p>
                       <p>
                         <label>
-                            <input  type="radio"  />
+                            <input value="<%= obj.questionId.options[1] %>" name="oq<%=ocount%>" type="radio"  />
                             <span><%= obj.questionId.options[1] %></span>
                         </label>
                       </p>
                       <p>
                         <label>
-                            <input type="radio"  />
+                            <input value="<%= obj.questionId.options[2] %>" name="oq<%=ocount%>" type="radio"  />
                             <span><%= obj.questionId.options[2] %></span>
                         </label>
                       </p>
                       <p>
                         <label>
-                            <input type="radio"  />
+                            <input value="<%= obj.questionId.options[3] %>" name="oq<%=ocount%>" type="radio"  />
                             <span><%= obj.questionId.options[3] %></span>
                         </label>
                       </p>
@@ -153,10 +156,11 @@
         <% data.response.forEach((obj) => { %> 
           <% if(obj.questionId.qDomain =="management") { %>
         <div class="question">
-          <% m_count++;count++; %>
+          <% m_count++;%>
 
           <% if(obj.questionId.qType == "Subjective") { %>
             <!-- <div class="subj-question"> -->
+                <% count++; %>
               <div class="repeated">
                 <h5>Question <%=m_count%></h5>
                 <p class="q"><%= obj.questionId.question %></p>
@@ -173,34 +177,35 @@
             <!-- </div> -->
             <% } %>
             <% if(obj.questionId.qType == "Objective") { %>
+              <% ocount++; %>
               <div class="mcq-question">
                   <div class="repeated">
                     <h5>ObjQuestion <%=m_count%></h5>
                     <p class="q"><%= obj.questionId.question %></p>
-                    <p id="qid<%=count%>" style="display:none">
+                    <p id="oqid<%=ocount%>" style="display:none">
                       <%=obj.questionId._id%>
                     </p>
-                      <p>
+                    <p>
                         <label>
-                            <input type="radio"  />
+                            <input  value="<%= obj.questionId.options[0] %>" name="oq<%=ocount%>" type="radio"  />
                             <span><%= obj.questionId.options[0] %></span>
                         </label>
                       </p>
                       <p>
                         <label>
-                            <input  type="radio"  />
+                            <input value="<%= obj.questionId.options[1] %>" name="oq<%=ocount%>" type="radio"  />
                             <span><%= obj.questionId.options[1] %></span>
                         </label>
                       </p>
                       <p>
                         <label>
-                            <input type="radio"  />
+                            <input value="<%= obj.questionId.options[2] %>" name="oq<%=ocount%>" type="radio"  />
                             <span><%= obj.questionId.options[2] %></span>
                         </label>
                       </p>
                       <p>
                         <label>
-                            <input type="radio"  />
+                            <input value="<%= obj.questionId.options[3] %>" name="oq<%=ocount%>" type="radio"  />
                             <span><%= obj.questionId.options[3] %></span>
                         </label>
                       </p>
@@ -231,9 +236,10 @@
            <% if(obj.questionId.qDomain ==
         "design") { %>
         <div class="question">
-          <% d_count++; count++;%>
+          <% d_count++; %>
           <% if(obj.questionId.qType == "Subjective") { %>
             <!-- <div class="subj-question"> -->
+                <% count++; %>
               <div class="repeated">
                 <h5>Question <%=d_count%></h5>
                 <p class="q"><%= obj.questionId.question %></p>
@@ -250,34 +256,35 @@
             <!-- </div> -->
             <% } %>
             <% if(obj.questionId.qType == "Objective") { %>
+              <% ocount++; %>
               <div class="mcq-question">
                   <div class="repeated">
                     <h5>ObjQuestion <%=d_count%></h5>
                     <p class="q"><%= obj.questionId.question %></p>
-                    <p id="qid<%=count%>" style="display:none">
+                    <p id="oqid<%=ocount%>" style="display:none">
                       <%=obj.questionId._id%>
                     </p>
-                      <p>
+                    <p>
                         <label>
-                            <input type="radio"  />
+                            <input  value="<%= obj.questionId.options[0] %>" name="oq<%=ocount%>" type="radio"  />
                             <span><%= obj.questionId.options[0] %></span>
                         </label>
                       </p>
                       <p>
                         <label>
-                            <input  type="radio"  />
+                            <input value="<%= obj.questionId.options[1] %>" name="oq<%=ocount%>" type="radio"  />
                             <span><%= obj.questionId.options[1] %></span>
                         </label>
                       </p>
                       <p>
                         <label>
-                            <input type="radio"  />
+                            <input value="<%= obj.questionId.options[2] %>" name="oq<%=ocount%>" type="radio"  />
                             <span><%= obj.questionId.options[2] %></span>
                         </label>
                       </p>
                       <p>
                         <label>
-                            <input type="radio"  />
+                            <input value="<%= obj.questionId.options[3] %>" name="oq<%=ocount%>" type="radio"  />
                             <span><%= obj.questionId.options[3] %></span>
                         </label>
                       </p>
@@ -301,6 +308,84 @@
       </div>
       <% } %>
     </div>
+    <div id="documentation_tab" class="col s12">
+        <div class="box doc-q">
+          <% data.response.forEach((obj) => { %>
+             <% if(obj.questionId.qDomain ==
+          "documentation") { %>
+          <div class="question">
+            <% doc_count++; %>
+            <% if(obj.questionId.qType == "Subjective") { %>
+              <!-- <div class="subj-question"> -->
+                  <% count++; %>
+                <div class="repeated">
+                  <h5>Question <%=doc_count%></h5>
+                  <p class="q"><%= obj.questionId.question %></p>
+                  <p id="qid<%=count%>" style="display:none">
+                    <%=obj.questionId._id%>
+                  </p>
+                  <textarea
+                    id="q<%=count%>"
+                    class="materialize-textarea"
+                    placeholder="Type your answer"
+                    data-length="1000"
+                  ></textarea>
+                </div>
+              <!-- </div> -->
+              <% } %>
+              <% if(obj.questionId.qType == "Objective") { %>
+                <% ocount++; %>
+                <div class="mcq-question">
+                    <div class="repeated">
+                      <h5>ObjQuestion <%=doc_count%></h5>
+                      <p class="q"><%= obj.questionId.question %></p>
+                      <p id="oqid<%=ocount%>" style="display:none">
+                        <%=obj.questionId._id%>
+                      </p>
+                      <p>
+                          <label>
+                              <input  value="<%= obj.questionId.options[0] %>" name="oq<%=ocount%>" type="radio"  />
+                              <span><%= obj.questionId.options[0] %></span>
+                          </label>
+                        </p>
+                        <p>
+                          <label>
+                              <input value="<%= obj.questionId.options[1] %>" name="oq<%=ocount%>" type="radio"  />
+                              <span><%= obj.questionId.options[1] %></span>
+                          </label>
+                        </p>
+                        <p>
+                          <label>
+                              <input value="<%= obj.questionId.options[2] %>" name="oq<%=ocount%>" type="radio"  />
+                              <span><%= obj.questionId.options[2] %></span>
+                          </label>
+                        </p>
+                        <p>
+                          <label>
+                              <input value="<%= obj.questionId.options[3] %>" name="oq<%=ocount%>" type="radio"  />
+                              <span><%= obj.questionId.options[3] %></span>
+                          </label>
+                        </p>
+                    </div>
+                  </div>
+              <% } %>
+          </div>
+          <% }}); %> <% if (doc_count==0) { %>
+          <h5 style="text-align:center;">You have not chosen this domain...</h5>
+          <% } %>
+        </div>
+        <% if(doc_count>0) { %>
+        <div class="button-pos">
+          <button
+            style="text-align:center;"
+            class="mobile mobile-submit"
+            onclick="submit()"
+          >
+            Submit
+          </button>
+        </div>
+        <% } %>
+      </div>
     <div id="modal1" class="modal">
       <div class="modal-content" style="color:black;">
         <h4>Time Up!</h4>
@@ -348,7 +433,7 @@
         flag = 1;
         clearInterval(time);
         var totQues = parseInt("<%=count%>");
-        console.log(totQues);
+        // console.log(totQues);
         var solutions = [];
         for (var i = 1; i <= totQues; i++) {
           var obj = {
@@ -358,8 +443,39 @@
               .trim()
           };
           solutions.push(obj);
-          console.log(solutions);
+          // console.log(solutions);
         }
+
+        var totQues = parseInt("<%=ocount%>");
+        // console.log(totQues);
+        for (var i = 1; i <= totQues; i++) {
+          var x = document.getElementsByName("oq"+i);
+          var p=0;
+          for(var j=0;j<4;j++){
+            if(x[j].checked){
+              var obj = {
+                userSolution: x[j].value,
+                questionId: $("#oqid" + i)
+                  .text()
+                  .trim()
+              };
+              p=1;
+            }
+          }
+          if(p==1)
+          solutions.push(obj);
+          else{
+            var obj = {
+                userSolution: "not selected",
+                questionId: $("#oqid" + i)
+                  .text()
+                  .trim()
+              };
+              solutions.push(obj);
+          }
+          // console.log(solutions);
+        }
+      
         $.ajax({
           url: "/question",
           method: "POST",
