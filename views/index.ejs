@@ -158,6 +158,7 @@
                           autocomplete="off"
                           required
                         />
+                        <input type="text" for="g-recaptcha-response" class="g-recaptcha-response" name="g-recaptcha-response" hidden>
                         <ul>
                           <li>&nbsp;&nbsp;&nbsp;&nbsp;</li>
                           <li>
@@ -264,14 +265,16 @@
       <div class="g-recaptcha" data-sitekey="6Leu6n8UAAAAAE33Fo9VhAe4f3QJ7YRrU7L63194" data-size="invisible"
               data-callback="setResponse"></div>
     </div>
-    <script src="https://www.google.com/recaptcha/api.js?render=6Leu6n8UAAAAAE33Fo9VhAe4f3QJ7YRrU7L63194"></script>
-<script>
-grecaptcha.ready(function() {
-    grecaptcha.execute('6Leu6n8UAAAAAE33Fo9VhAe4f3QJ7YRrU7L63194', {action: 'homepage'}).then(function(token) {
-       
-    });
-});
-</script>
+    <script src="https://www.google.com/recaptcha/api.js?onload=onloadCallback" async defer></script>
+  <script>
+    var onloadCallback = function () {
+      grecaptcha.execute();
+    };
+    function setResponse(response) {
+        document.querySelector(".g-recaptcha-response").value= response;
+        console.log(document.querySelector(".g-recaptcha-response").value);
+    }
+  </script>
     
     
     <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
