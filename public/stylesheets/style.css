@@ -98,7 +98,10 @@
 }
 @import url(https://fonts.googleapis.com/css?family=Oswald|Roboto);
 *.focus {
-  outline: 0;
+  /* outline-style:none !important; */
+  /* box-shadow:none;
+  border-color:transparent; */
+  
 }
 body {
   /*background-image: url('images/grid2.png');*/

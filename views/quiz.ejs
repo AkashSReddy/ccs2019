@@ -71,29 +71,68 @@
       <li><a onclick="submit()" style="color:white">Submit</a></li> -->
       <!-- <li><a href="/logout" style="color:white">Logout</a></li> -->
     </ul>
-    <% var count=0%> <% var t_count=0; %> <% var m_count=0; %> <% var d_count=0;
-    %>
+    <% var count=0%> <% var t_count=0; %> <% var m_count=0; %> <% var d_count=0; %>
     <div id="technical_tab" class="col s12">
       <div class="box tech-q">
-        <% data.response.forEach((obj) => { %> <% if(obj.questionId.qDomain ==
-        "technical") { %>
+        <% data.response.forEach((obj) => { %> 
+          <% if(obj.questionId.qDomain == "technical") { %>
         <div class="question">
-          <% t_count++; count++; %>
-          <div class="repeated">
-            <h5>Question <%=t_count%></h5>
-            <p class="q"><%= obj.questionId.question %></p>
-            <p id="qid<%=count%>" style="display:none">
-              <%=obj.questionId._id%>
-            </p>
-            <textarea
-              id="q<%=count%>"
-              class="materialize-textarea"
-              placeholder="Type your answer"
-              data-length="1000"
-            ></textarea>
-          </div>
+          <% t_count++; count++; %> 
+          <% if(obj.questionId.qType == "Subjective") { %>
+            <!-- <div class="subj-question"> -->
+              <div class="repeated">
+                <h5>Question <%=t_count%></h5>
+                <p class="q"><%= obj.questionId.question %></p>
+                <p id="qid<%=count%>" style="display:none">
+                  <%=obj.questionId._id%>
+                </p>
+                <textarea
+                  id="q<%=count%>"
+                  class="materialize-textarea"
+                  placeholder="Type your answer"
+                  data-length="1000"
+                ></textarea>
+              </div>
+            <!-- </div> -->
+            <% } %>
+            <% if(obj.questionId.qType == "Objective") { %>
+              <div class="mcq-question">
+                  <div class="repeated">
+                    <h5>ObjQuestion <%=t_count%></h5>
+                    <p class="q"><%= obj.questionId.question %></p>
+                    <p id="qid<%=count%>" style="display:none">
+                      <%=obj.questionId._id%>
+                    </p>
+                      <p>
+                        <label>
+                            <input type="radio"  />
+                            <span><%= obj.questionId.options[0] %></span>
+                        </label>
+                      </p>
+                      <p>
+                        <label>
+                            <input  type="radio"  />
+                            <span><%= obj.questionId.options[1] %></span>
+                        </label>
+                      </p>
+                      <p>
+                        <label>
+                            <input type="radio"  />
+                            <span><%= obj.questionId.options[2] %></span>
+                        </label>
+                      </p>
+                      <p>
+                        <label>
+                            <input type="radio"  />
+                            <span><%= obj.questionId.options[3] %></span>
+                        </label>
+                      </p>
+                  </div>
+                </div>
+            <% } %>
         </div>
-        <% }}); %> <% if (t_count==0) { %>
+        <% }}); %> 
+        <% if (t_count==0) { %>
         <h5 style="text-align:center;">You have not chosen this domain.</h5>
         <% } %>
       </div>
@@ -111,23 +150,64 @@
     </div>
     <div id="management_tab" class="col s12">
       <div class="box tech-q">
-        <% data.response.forEach((obj) => { %> <% if(obj.questionId.qDomain ==
-        "management") { %>
+        <% data.response.forEach((obj) => { %> 
+          <% if(obj.questionId.qDomain =="management") { %>
         <div class="question">
           <% m_count++;count++; %>
-          <div class="repeated">
-            <h5>Question <%=m_count%></h5>
-            <p class="q"><%= obj.questionId.question %></p>
-            <p id="qid<%=count%>" style="display:none">
-              <%=obj.questionId._id%>
-            </p>
-            <textarea
-              id="q<%=count%>"
-              class="materialize-textarea"
-              placeholder="Type your answer"
-              data-length="1000"
-            ></textarea>
-          </div>
+
+          <% if(obj.questionId.qType == "Subjective") { %>
+            <!-- <div class="subj-question"> -->
+              <div class="repeated">
+                <h5>Question <%=m_count%></h5>
+                <p class="q"><%= obj.questionId.question %></p>
+                <p id="qid<%=count%>" style="display:none">
+                  <%=obj.questionId._id%>
+                </p>
+                <textarea
+                  id="q<%=count%>"
+                  class="materialize-textarea"
+                  placeholder="Type your answer"
+                  data-length="1000"
+                ></textarea>
+              </div>
+            <!-- </div> -->
+            <% } %>
+            <% if(obj.questionId.qType == "Objective") { %>
+              <div class="mcq-question">
+                  <div class="repeated">
+                    <h5>ObjQuestion <%=m_count%></h5>
+                    <p class="q"><%= obj.questionId.question %></p>
+                    <p id="qid<%=count%>" style="display:none">
+                      <%=obj.questionId._id%>
+                    </p>
+                      <p>
+                        <label>
+                            <input type="radio"  />
+                            <span><%= obj.questionId.options[0] %></span>
+                        </label>
+                      </p>
+                      <p>
+                        <label>
+                            <input  type="radio"  />
+                            <span><%= obj.questionId.options[1] %></span>
+                        </label>
+                      </p>
+                      <p>
+                        <label>
+                            <input type="radio"  />
+                            <span><%= obj.questionId.options[2] %></span>
+                        </label>
+                      </p>
+                      <p>
+                        <label>
+                            <input type="radio"  />
+                            <span><%= obj.questionId.options[3] %></span>
+                        </label>
+                      </p>
+                  </div>
+                </div>
+            <% } %>
+            
         </div>
         <% }}); %> <% if (m_count==0) { %>
         <h5 style="text-align:center;">You have not chosen this domain...</h5>
@@ -147,23 +227,63 @@
     </div>
     <div id="design_tab" class="col s12">
       <div class="box tech-q">
-        <% data.response.forEach((obj) => { %> <% if(obj.questionId.qDomain ==
+        <% data.response.forEach((obj) => { %>
+           <% if(obj.questionId.qDomain ==
         "design") { %>
         <div class="question">
           <% d_count++; count++;%>
-          <div class="repeated">
-            <h5>Question <%=d_count%></h5>
-            <p class="q"><%= obj.questionId.question %></p>
-            <p id="qid<%=count%>" style="display:none">
-              <%=obj.questionId._id%>
-            </p>
-            <textarea
-              id="q<%=count%>"
-              class="materialize-textarea"
-              placeholder="Type your answer"
-              data-length="1000"
-            ></textarea>
-          </div>
+          <% if(obj.questionId.qType == "Subjective") { %>
+            <!-- <div class="subj-question"> -->
+              <div class="repeated">
+                <h5>Question <%=d_count%></h5>
+                <p class="q"><%= obj.questionId.question %></p>
+                <p id="qid<%=count%>" style="display:none">
+                  <%=obj.questionId._id%>
+                </p>
+                <textarea
+                  id="q<%=count%>"
+                  class="materialize-textarea"
+                  placeholder="Type your answer"
+                  data-length="1000"
+                ></textarea>
+              </div>
+            <!-- </div> -->
+            <% } %>
+            <% if(obj.questionId.qType == "Objective") { %>
+              <div class="mcq-question">
+                  <div class="repeated">
+                    <h5>ObjQuestion <%=d_count%></h5>
+                    <p class="q"><%= obj.questionId.question %></p>
+                    <p id="qid<%=count%>" style="display:none">
+                      <%=obj.questionId._id%>
+                    </p>
+                      <p>
+                        <label>
+                            <input type="radio"  />
+                            <span><%= obj.questionId.options[0] %></span>
+                        </label>
+                      </p>
+                      <p>
+                        <label>
+                            <input  type="radio"  />
+                            <span><%= obj.questionId.options[1] %></span>
+                        </label>
+                      </p>
+                      <p>
+                        <label>
+                            <input type="radio"  />
+                            <span><%= obj.questionId.options[2] %></span>
+                        </label>
+                      </p>
+                      <p>
+                        <label>
+                            <input type="radio"  />
+                            <span><%= obj.questionId.options[3] %></span>
+                        </label>
+                      </p>
+                  </div>
+                </div>
+            <% } %>
         </div>
         <% }}); %> <% if (d_count==0) { %>
         <h5 style="text-align:center;">You have not chosen this domain...</h5>
