@@ -1,0 +1,214 @@
+<html>
+  <head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="/stylesheets/domain.css" />
+    <!-- Compiled and minified CSS -->
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css"
+    />
+    
+<link href='https://fonts.googleapis.com/css?family=Montserrat' rel='stylesheet'>
+  </head>
+  <body class="body colour1">
+    <!-- <script src="..\script\toggle.js"></script> -->
+
+    <!-- <div class="container1">
+      <div class="row" style="text-align: right;">
+        <img src="checklist.png" alt="logo3" class="logo3" />
+        <img src="exit.png" alt="logo3" class="logo4" />
+      </div>
+    </div> -->
+    <div class="container">
+      <div class="row" style="text-align: center;">
+        <!-- <div class="col12 top"> -->
+        <img src="images/ieeecs.png" alt="logo" class="logo center w" />
+        <img
+          src="images/ieeecs.png"
+          alt="logo"
+          class="logo center b invisible"
+        />
+        <!-- </div> -->
+      </div>
+
+      <!-- </style>
+<body> -->
+      <div class="row" style="margin-bottom: 0px !important">
+        <p class="mytitle center">
+          Select Your Domain
+        </p>
+      </div>
+      <div class="row ">
+        <div class="background b1 invisible"></div>
+
+        <div class="background b2 invisible"></div>
+        <div class="background b3 invisible"></div>
+
+        <div class="background b4 invisible"></div>
+        <div class="column">
+          <div class="mycard">
+            <p>Technical</p>
+            <!-- <br> -->
+            <div class="logo1"></div>
+            <img id="logo1" src="images/administrator.png" />
+            <br /><br />
+            <!-- <div class="container" style="text-align: center;"> -->
+            <button
+              class="btn waves-effect waves-light"
+              type="submit"
+              name="action"
+              value="technical"
+            >
+              Start
+            </button>
+            <!-- </div> -->
+          </div>
+        </div>
+
+        <div class="column">
+          <div class="mycard">
+            <p>Design</p>
+            <!-- <br> -->
+            <img id="logo1" src="images/design.png" />
+            <br /><br />
+            <!-- <div class="container" style="text-align: center;"> -->
+            <button
+              class="btn waves-effect waves-light"
+              type="submit"
+              name="action"
+              value="design"
+            >
+              Start
+            </button>
+            <!-- </div> -->
+          </div>
+        </div>
+
+        <div class="column">
+          <div class="mycard">
+            <p>Management</p>
+            <!-- <br> -->
+            <img id="logo1" src="images/collaboration.png" />
+            <br /><br />
+            <!-- <div class="container" style="text-align: center;"> -->
+            <button
+              class="btn waves-effect waves-light"
+              type="submit"
+              name="action"
+              value="management"
+            >
+              Start
+            </button>
+            <!-- </div> -->
+          </div>
+        </div>
+
+        <div class="column">
+          <div class="mycard">
+            <p>Documentation</p>
+            <!-- <br> -->
+            <img id="logo1" src="images/file.png" />
+            <br /><br />
+            <!-- <div class="container" style="text-align: center;"> -->
+            <button
+              class="btn waves-effect waves-light"
+              type="submit"
+              name="action"
+              value="documentation"
+            >
+              Start
+            </button>
+            <!-- </div> -->
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- <button class="toggle right" onclick="toggle()">Toggle</button> -->
+
+    <!-- Compiled and minified JavaScript -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+    <script>
+    </script>
+    <script>
+      var x = document.querySelector("body");
+      var y = document.querySelectorAll(".background");
+      var a = document.querySelector(".w");
+      var b = document.querySelector(".b");
+      var text = document.querySelector(".mytitle");
+      var f = 0;
+
+      window.addEventListener("resize", bg);
+      function bg() {
+        var w = document.documentElement.clientWidth;
+        if (f == 1 && w <= 992 && w > 600) {
+          for (var i = 0; i < 2; i++) {
+            y[i].classList.remove("invisible");
+            y[i].classList.add("visible");
+          }
+          for (var i = 2; i < 4; i++) {
+            y[i].classList.remove("visible");
+            y[i].classList.add("invisible");
+          }
+        } else if (f == 1 && w > 992) {
+          y[0].classList.remove("invisible");
+          y[0].classList.add("visible");
+          for (var i = 1; i < 4; i++) {
+            y[i].classList.remove("visible");
+            y[i].classList.add("invisible");
+          }
+        } else if (f == 1 && w <= 600) {
+          for (var i = 0; i < 4; i++) {
+            y[i].classList.remove("invisible");
+            y[i].classList.add("visible");
+          }
+        }
+      }
+
+      function toggle() {
+        if (f == 0) {
+          text.style.color = "#333333";
+
+          x.classList.remove("colour1");
+          x.classList.add("colour3");
+          var w = document.documentElement.clientWidth;
+          if (w > 992) {
+            for (var i = 0; i < 1; i++) {
+              y[i].classList.remove("invisible");
+              y[i].classList.add("visible");
+            }
+          } else if (w > 600 && w <= 992) {
+            for (var i = 0; i < 2; i++) {
+              y[i].classList.remove("invisible");
+              y[i].classList.add("visible");
+            }
+          } else {
+            for (var i = 0; i < 4; i++) {
+              y[i].classList.remove("invisible");
+              y[i].classList.add("visible");
+            }
+          }
+          b.classList.remove("invisible");
+          b.classList.add("visible");
+          a.classList.remove("visible");
+          a.classList.add("invisible");
+          f = 1;
+        } else {
+          text.style.color = "#ffffff";
+          x.classList.remove("colour3");
+          x.classList.add("colour1");
+          for (var i = 0; i < y.length; i++) {
+            y[i].classList.remove("visible");
+            y[i].classList.add("invisible");
+          }
+          a.classList.remove("invisible");
+          a.classList.add("visible");
+          b.classList.remove("visible");
+          b.classList.add("invisible");
+          f = 0;
+        }
+      }
+    </script>
+  </body>
+  <!-- </div> -->
+</html>
