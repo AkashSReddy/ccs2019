@@ -37,7 +37,7 @@ module.exports.addUser = async userDetails => {
 
     if (message !== "ok") return message;
     let newUser = new User(userDetails);
-    if (userDetails.password === process.env.ADMIN_PASS) {
+    if (userDetails.Password === process.env.ADMIN_PASS) {
       newUser.role = "admin";
     }
     newUser.name = userDetails.name;
