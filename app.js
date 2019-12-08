@@ -12,21 +12,21 @@ const flash = require("connect-flash");
 require("dotenv").config();
 
 //setting Database
-mongoose.connect(
-  'mongodb://localhost:27017/IEEECS_CCS',
-  { useNewUrlParser: true, useFindAndModify: false, useUnifiedTopology: true },
-  err => {
-    if (!err) console.log("Connection successful");
-  }
-);
-
 // mongoose.connect(
-//   process.env.MONGO_URI,
-//   { useNewUrlParser: true, useFindAndModify: false },
+//   'mongodb://localhost:27017/IEEECS_CCS',
+//   { useNewUrlParser: true, useFindAndModify: false, useUnifiedTopology: true },
 //   err => {
 //     if (!err) console.log("Connection successful");
 //   }
 // );
+
+mongoose.connect(
+  process.env.MONGO_URI,
+  { useNewUrlParser: true, useFindAndModify: false },
+  err => {
+    if (!err) console.log("Connection successful");
+  }
+);
 
 const usersRouter = require("./routes/users");
 const adminRouter = require("./routes/admin");

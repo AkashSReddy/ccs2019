@@ -1,0 +1,60 @@
+html {
+    font-family: "Montserrat";
+    list-style: none;
+  }
+  
+.colour1 {
+    
+    
+    background-color: #202020;
+    /* background-image: url('grid2.png'); */
+    height: 100%;
+    width: 100%;
+    padding-bottom: 30px;
+  }
+
+  .colour3 {
+    background-color: #ffffff;
+    /* background-image: url('grid2.png'); */
+    height: 100%;
+    width: 100%;
+    padding-bottom: 30px;
+  }
+
+.colour2{
+    /* background-color: #f1f1f1; */
+    background-color: #333; 
+    color:  #fff !important;
+    border-radius: 24px;
+    padding: 0.5em 2em;
+    text-align: justify;
+    padding-bottom: 15px;
+    margin: 4% 0; 
+  }  
+
+p {
+    font-size: 1.0em;
+}
+.form-heading {
+    text-align: center;
+    font-weight: 700;
+  }
+  
+  
+.input-field {
+    padding: 0;
+    margin: 10px;
+  }
+  
+
+  
+.logo {
+    height: 50px;
+    margin: 35px;
+  }
+.btn {
+  background-color:#faa41a !important;
+  color: darkslategrey;
+  margin: 5px;
+  border-radius: 20px !important;
+}
