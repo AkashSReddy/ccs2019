@@ -24,7 +24,6 @@ module.exports.addUser = async userDetails => {
     let user = await User.findOne({
       $or: [{ regno: userDetails.regno }, { email: userDetails.email }]
     })
-
     // console.log("query success");
     console.log(user);
 
@@ -40,6 +39,7 @@ module.exports.addUser = async userDetails => {
     // if (userDetails.Password === process.env.ADMIN_PASS) {
     //   newUser.role = "admin";
     // }
+    console.log(userDetails)
     newUser.name = userDetails.name;
     newUser.email = userDetails.email;
     newUser.regno = userDetails.regno;

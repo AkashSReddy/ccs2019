@@ -72,6 +72,7 @@ router.get("/register", (req, res) => {
 //Register with recaptcha
 
 router.post("/register", async (req, res, next) => {
+  console.log(req.body)
   const options = {
     method: "POST",
     uri: "https://www.google.com/recaptcha/api/siteverify",
@@ -89,8 +90,8 @@ router.post("/register", async (req, res, next) => {
       return userFunctions
         .addUser(req.body)
         .then(function (message) {
-          if (message === "ok") return res.redirect("/");
-          return res.render("register", { message: message });
+          if (message === "ok") return res.render("index", { message: "ok" });
+          return res.render("index", { message: message });
         })
         .catch(err => {
           console.log(err);
