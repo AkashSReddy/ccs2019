@@ -32,42 +32,51 @@ li {
       <div class="row">
           <div class="phone_reg">
             <h2 class="Sheading">Register</h2>
-            <form action="">
-                <input
-                name="email"
-                placeholder="Email"
-                type="text"
-                required
-              /><input
-                name="fullName"
+            <form autocomplete="off" action="/register" method="POST" name="reg_form">
+              <input autocomplete="false" name="hidden" type="text" style="display:none;">
+              <input
+                name="name"
                 placeholder="Name"
                 type="text"
                 pattern="[a-zA-Z][a-zA-Z ]+[a-zA-Z]$"
+                autocomplete="off"
                 required
-              /><input
-                name="Username"
-                placeholder="Register Number"
+              /> <input
+              name="regno"
+              placeholder="Reg. No."
+              type="text"
+              pattern="19[A-Z]{3}[0-9]{3}[0-9]$"
+              autocomplete="off"
+              required
+            /><input
+                name="email"
+                placeholder="Email"
                 type="text"
-                pattern="19[A-Z]{3}[0-9]{3}[0-9]$"
+                autocomplete="off"
                 required
               /><input
-                name="Password"
-                placeholder="Password"
-                type="Password"
-                pattern="(?=^.{8,}$)((?=.*\d)|(?=.*\W+))(?![.\n])(?=.*[A-Z])(?=.*[a-z]).*$"
-                required
-              />
+              name="Password"
+              placeholder="Password"
+              type="Password"
+              pattern="(?=^.{8,}$)((?=.*\d)|(?=.*\W+))(?![.\n])(?=.*[A-Z])(?=.*[a-z]).*$"
+              autocomplete="off"
+              required
+              title="Minimum 8 characters. Must contain a Special character, a
+              Digit and Upper & Lowercase letters."
+            />
+             
               <!-- <span class="helper-text">Minimum 8 characters. Must contain a Special character, a
               Digit and Upper & Lowercase letters.</span> -->
               <input
-                name="Phone"
+                name="phone"
                 placeholder="Phone Number"
                 type="number"
                 pattern="[0-9]{9}[0-9]$"
+                autocomplete="off"
                 required
               />
-              <ul>
-                <li>&nbsp;&nbsp;&nbsp;&nbsp;</li>
+              <ul >
+                <!-- <li>&nbsp;&nbsp;&nbsp;&nbsp;</li> -->
                 <li>
                   <input
                     type="radio"
@@ -93,18 +102,27 @@ li {
                 </li>
               </ul>
               <br /><br>
-            <div class="btn">
-                <button
-                  style="border:none; height:100%; width:100%; background-color: transparent;"
-                >
-                  Register
-                </button>
-              </div>
+              <button
+              style="z-index:100;border:none; height:100%; width:100%; background-color: #faa41a;color: #333333;padding:10px 13px 10px 13px;width: 180px; margin: auto;border-radius:100px;"
+            >
+              Submit
+            </button>
           </form>
             <br>
             <h4 style="color: white" id="reglink">Already Registered? Click here to <a href="/">Log in</a></h4>  
           </div>
       </div>
+
+      <div class="g-recaptcha" data-sitekey="6Leu6n8UAAAAAE33Fo9VhAe4f3QJ7YRrU7L63194" data-size="invisible"
+              data-callback="setResponse"></div>
     </div>
+    <script src="https://www.google.com/recaptcha/api.js?render=6Leu6n8UAAAAAE33Fo9VhAe4f3QJ7YRrU7L63194"></script>
+<script>
+grecaptcha.ready(function() {
+    grecaptcha.execute('6Leu6n8UAAAAAE33Fo9VhAe4f3QJ7YRrU7L63194', {action: 'homepage'}).then(function(token) {
+       
+    });
+});
+</script>
 </body>
 </html>
