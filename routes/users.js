@@ -102,8 +102,8 @@ router.post("/register", async (req, res, next) => {
     let message = await userFunctions.addUser(req.body);
     // console.log(req.body);
     console.log(message)
-    if (message === "ok") return res.redirect("/");
-    return res.render("register", { message: message });
+    if (message === "ok") return res.render("index", { message: "ok" });
+    return res.render("index", { message: message });
   } catch (err) {
     next(err);
   }
@@ -213,8 +213,8 @@ router.post("/domain", auth.isUser, auth.isAttempt, async (req, res, next) => {
   }
 });
 
-//ADD auth.isAttempt To this route
-router.get("/question", auth.isUser, async (req, res, next) => {
+
+router.get("/question", auth.isUser, auth.isAttempt, async (req, res, next) => {
   try {
     var stuff = await userService.setQuestions(req.user.id);
 
