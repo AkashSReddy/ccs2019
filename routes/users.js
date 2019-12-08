@@ -13,35 +13,6 @@ router.get("/", (req, res) => {
   res.render("index", { message: req.flash("message") || "" });
 });
 
-// test routes
-
-// router.get("/del/:id", async (req, res, next) => {
-//   try {
-//     let response = await userFunctions.deleteUser(req.params.id);
-//     if (response instanceof Error) {
-//       throw response;
-//     }
-//     res.json(response);
-//   } catch (err) {
-//     next(err)
-//   }
-// })
-
-// router.get("/all", (req, res) => {
-//   userFunctions.getUsers();
-//   return res.send("Yes")
-// })
-
-// router.post("/update", async (req, res, next) => {
-//   try {
-//     await userFunctions.updateUser(req.body);
-//     // console.log(req.body)
-//   } catch (err) {
-//     next(err);
-//   }
-// })
-
-
 
 router.post(
   "/login",
@@ -52,12 +23,8 @@ router.post(
   })
 );
 
-// router.get("/closed", (req, res) => {
-//   res.render("closed");
-// });
 
 router.get("/register", (req, res) => {
-  // return res.redirect("/closed");
   res.render("register", { message: "" });
 });
 
@@ -176,20 +143,22 @@ router.get("/user-role", auth.isLoggedIn, (req, res, next) => {
   }
 });
 
-router.get("/data/:idd", async (req, res, next) => {
-  try {
-    var idd = req.path;
-    idd = idd.split("/");
-    idd = idd[2];
-    var data = await A_Database.find(
-      { regno: idd },
-      "regno response status overSmart"
-    ).populate("response.questionId", "question qDomain answer");
-    res.json(data);
-  } catch (error) {
-    next(error);
-  }
-});
+//Commented for now
+
+// router.get("/data/:idd", async (req, res, next) => {
+//   try {
+//     var idd = req.path;
+//     idd = idd.split("/");
+//     idd = idd[2];
+//     var data = await A_Database.find(
+//       { regno: idd },
+//       "regno response status overSmart"
+//     ).populate("response.questionId", "question qDomain answer");
+//     res.json(data);
+//   } catch (error) {
+//     next(error);
+//   }
+// });
 
 router.get("/logout", auth.isLoggedIn, (req, res) => {
   req.logout();
@@ -206,12 +175,11 @@ router.get(
   auth.isUser,
   auth.isAttempt,
   async (req, res, next) => {
-    // req.logout();
-    // return res.redirect("/closed");
-
     res.render("instructions", { user: req.user });
   }
 );
+
+
 
 //test route for domains
 
@@ -231,6 +199,14 @@ router.get(
 //   res.send("yes");
 //   res.end();
 // })
+
+router.get("/domain", auth.isUser, auth.isAttempt, async (req, res, next) => {
+  try {
+    return res.render("domains", { user: req.user })
+  } catch (error) {
+    return next(error)
+  }
+})
 
 router.post("/domain", auth.isUser, auth.isAttempt, async (req, res, next) => {
   try {
@@ -252,7 +228,6 @@ router.post("/domain", auth.isUser, auth.isAttempt, async (req, res, next) => {
       startTime: startTime,
       maxTime: maxTime
     });
-    // res.redirect
     res.json({ success: true });
   } catch (error) {
     return next(error);
@@ -261,8 +236,6 @@ router.post("/domain", auth.isUser, auth.isAttempt, async (req, res, next) => {
 
 router.get("/question", auth.isUser, auth.isAttempt, async (req, res, next) => {
   try {
-    // req.logout();
-    // return res.redirect("/closed");
     var stuff = await userService.setQuestions(req.user.id);
 
     let questions = stuff.map(question => {
