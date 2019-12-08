@@ -118,10 +118,10 @@ body {
   background-color: #202020;
   overflow: hidden;
 }
-@keyframes animatedBackground {
+/* @keyframes animatedBackground {
 	from { background-position: 0 0; }
 	to { background-position: 100% 0; }
-}
+} */
 #mainlogo {
   height: 3em;
   position: relative;
