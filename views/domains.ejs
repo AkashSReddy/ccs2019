@@ -54,12 +54,14 @@
             <br /><br />
             <!-- <div class="container" style="text-align: center;"> -->
             <button
+            style="background-color: #faa41a; color: #333333;"
               class="btn waves-effect waves-light"
               type="submit"
               name="action"
               value="technical"
+              onclick="add(this)"
             >
-              Start
+              Select
             </button>
             <!-- </div> -->
           </div>
@@ -73,12 +75,14 @@
             <br /><br />
             <!-- <div class="container" style="text-align: center;"> -->
             <button
+            style="background-color: #faa41a; color: #333333;"
               class="btn waves-effect waves-light"
               type="submit"
               name="action"
               value="design"
+              onclick="add(this)"
             >
-              Start
+              Select
             </button>
             <!-- </div> -->
           </div>
@@ -92,12 +96,14 @@
             <br /><br />
             <!-- <div class="container" style="text-align: center;"> -->
             <button
+            style="background-color: #faa41a; color: #333333;"
               class="btn waves-effect waves-light"
               type="submit"
               name="action"
               value="management"
+              onclick="add(this)"
             >
-              Start
+              Select
             </button>
             <!-- </div> -->
           </div>
@@ -111,16 +117,50 @@
             <br /><br />
             <!-- <div class="container" style="text-align: center;"> -->
             <button
+            style="background-color: #faa41a; color: #333333;"
               class="btn waves-effect waves-light"
               type="submit"
               name="action"
               value="documentation"
+              onclick="add(this)"
             >
-              Start
+              Select
             </button>
             <!-- </div> -->
           </div>
         </div>
+        <div class="column">
+            <div class="mycard">
+              <p>Competitive</p>
+              <!-- <br> -->
+              <img id="logo1" src="images/file.png" />
+              <br /><br />
+              <!-- <div class="container" style="text-align: center;"> -->
+              <button
+              style="background-color: #faa41a; color: #333333;"
+                class="btn waves-effect waves-light"
+                type="submit"
+                name="action"
+                value="competitive"
+                onclick="add(this)"
+              >
+                Select
+              </button>
+              <!-- </div> -->
+            </div>
+          </div>
+      </div>
+      <div class="row" style="text-align: center;">
+          <button
+          style="background-color: #faa41a; color: #333333;"
+          class="btn waves-effect waves-light"
+          type="submit"
+          name="action"
+          onclick="start()"
+          id="begin"
+        >
+          BEGIN !!
+        </button>
       </div>
     </div>
 
@@ -128,7 +168,62 @@
 
     <!-- Compiled and minified JavaScript -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
     <script>
+      domain =[]
+      function add(e){
+        f=0;
+        for(var i=0;i<domain.length;i++){
+          if(domain[i]==e.value){
+            f=1;
+            break;
+          }
+        }
+          if(f==0){
+            
+          domain.push(e.value);
+          e.style.background = "#333333";
+          e.style.color="#faa41a";
+          e.innerHTML="Selected";
+          // console.log(domain);
+            // f=0;
+          }
+          else{
+            index=domain.indexOf(e.value)
+            domain.splice(index,1);
+            e.style.background = "#faa41a";
+            e.style.color="#333333";
+            e.innerHTML="Select";
+            // console.log(domain);
+            f=1;
+          }
+      }
+      function start(){
+        var numOfDom = domain.length;
+      console.log(numOfDom);
+      if (numOfDom > 0) {
+        $.ajax({
+          url: "/domain",
+          method: "POST",
+          dataType: "json",
+          contentType: "application/x-www-form-urlencoded",
+          data: {
+            domain: domain
+          },
+          success: function(question) {
+            window.location.href = "/question";
+          },
+          error: function(msg) {
+            console.log(msg);
+            $("#begin").prop("disabled", false);
+          }
+        });
+      } else {
+        // $("#begin").prop("disabled", false);
+        alert("Please Select a Domain!");
+      }
+      }
+
     </script>
     <script>
       var x = document.querySelector("body");
@@ -138,32 +233,32 @@
       var text = document.querySelector(".mytitle");
       var f = 0;
 
-      window.addEventListener("resize", bg);
-      function bg() {
-        var w = document.documentElement.clientWidth;
-        if (f == 1 && w <= 992 && w > 600) {
-          for (var i = 0; i < 2; i++) {
-            y[i].classList.remove("invisible");
-            y[i].classList.add("visible");
-          }
-          for (var i = 2; i < 4; i++) {
-            y[i].classList.remove("visible");
-            y[i].classList.add("invisible");
-          }
-        } else if (f == 1 && w > 992) {
-          y[0].classList.remove("invisible");
-          y[0].classList.add("visible");
-          for (var i = 1; i < 4; i++) {
-            y[i].classList.remove("visible");
-            y[i].classList.add("invisible");
-          }
-        } else if (f == 1 && w <= 600) {
-          for (var i = 0; i < 4; i++) {
-            y[i].classList.remove("invisible");
-            y[i].classList.add("visible");
-          }
-        }
-      }
+      // window.addEventListener("resize", bg);
+      // function bg() {
+      //   var w = document.documentElement.clientWidth;
+      //   if (f == 1 && w <= 992 && w > 600) {
+      //     for (var i = 0; i < 2; i++) {
+      //       y[i].classList.remove("invisible");
+      //       y[i].classList.add("visible");
+      //     }
+      //     for (var i = 2; i < 4; i++) {
+      //       y[i].classList.remove("visible");
+      //       y[i].classList.add("invisible");
+      //     }
+      //   } else if (f == 1 && w > 992) {
+      //     y[0].classList.remove("invisible");
+      //     y[0].classList.add("visible");
+      //     for (var i = 1; i < 4; i++) {
+      //       y[i].classList.remove("visible");
+      //       y[i].classList.add("invisible");
+      //     }
+      //   } else if (f == 1 && w <= 600) {
+      //     for (var i = 0; i < 4; i++) {
+      //       y[i].classList.remove("invisible");
+      //       y[i].classList.add("visible");
+      //     }
+      //   }
+      // }
 
       function toggle() {
         if (f == 0) {
