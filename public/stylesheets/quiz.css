@@ -10,6 +10,7 @@ body{
 background-image: url('../images/line_pattern.png');
 background-position: 0px 0px;
 background-repeat: repeat-x;
+background-repeat: repeat-y;
 animation: animatedBackground 30s linear infinite;
 }
 
