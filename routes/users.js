@@ -103,17 +103,17 @@ router.post("/register", async (req, res, next) => {
 
 //Register without recaptcha
 
-// router.post("/register", async (req, res, next) => {
-//   try {
-//     let message = await userFunctions.addUser(req.body);
-//     // console.log(req.body);
-//     console.log(message)
-//     if (message === "ok") return res.render("index", { message: "ok" });
-//     return res.render("index", { message: message });
-//   } catch (err) {
-//     next(err);
-//   }
-// });
+    // router.post("/register", async (req, res, next) => {
+    //   try {
+    //     let message = await userFunctions.addUser(req.body);
+    //     // console.log(req.body);
+    //     console.log(message)
+    //     if (message === "ok") return res.render("index", { message: "ok" });
+    //     return res.render("index", { message: message });
+    //   } catch (err) {
+    //     next(err);
+    //   }
+    // });
 
 router.get("/user-role", auth.isLoggedIn, (req, res, next) => {
   try {
