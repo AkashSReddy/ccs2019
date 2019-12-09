@@ -15,7 +15,7 @@ module.exports = {
   isUser: (req, res, next) => {
     if (req.user && req.user.role === "public") return next();
     let error = new Error();
-    error.message = "You were supposed to restore the force not destroy it.";
+    error.message = "You have been logged out";
     error.status = 403;
     next(error);
   },
