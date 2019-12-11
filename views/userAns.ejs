@@ -42,6 +42,7 @@
                 <li class="tab"><a class="active" href="#tech">Technical</a></li>
                 <li class="tab"><a href="#manag">Management</a></li>
                 <li class="tab"><a href="#design">Design</a></li>
+                <li class="tab"><a href="#doc">Documentation</a></li>
             </ul>
         </div>
     </nav>
@@ -147,6 +148,36 @@
       </div>
 <!-- END Design -->
                 
+<!--Documentation-->
+<div id="doc" class="col s12 scrollable">
+
+  <div class="container white-text">
+      <% var d_count=0; %>
+      <% data[0].response.forEach((obj) => { %>
+        <% if(obj.questionId.qDomain == "design") { %>
+          <% d_count++; %>
+          <p><h5 class="q">Question <%= d_count%>
+          </h5></p>
+          <h5><%= obj.questionId.question %></h5>
+          <p><h5 class="q">User Answer:</h5></p>
+          <p><h5>
+              <%= obj.userSolution %>
+            </h5></p>
+      <p><h5 class="q">Expected Answer:
+      </h5></p>
+      <p><h5>
+          <%= obj.questionId.answer %>
+        </h5></p>
+      <div>&nbsp;</div>
+ <hr>
+ <div>&nbsp;</div>
+      <% }}); %>
+      <% if (d_count==0) { %>
+      <p class="white-text">Not chosen!</p>
+      <% } %>
+  </div>
+</div>
+<!--END Documentation-->
 
 
 <footer class="page-footer myfooter">
