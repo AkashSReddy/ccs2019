@@ -75,7 +75,7 @@ router.get("/register", (req, res) => {
 
 router.post("/register", async (req, res, next) => {
   req.logout();
-  return res.redirect("/thanks")
+  return res.render("closed")
   console.log(req.body)
   const options = {
     method: "POST",
