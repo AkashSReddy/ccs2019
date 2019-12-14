@@ -9,6 +9,11 @@
     />
     
 <link href='https://fonts.googleapis.com/css?family=Montserrat' rel='stylesheet'>
+<style>
+  .swal-button {
+    background-color: #faa41a !important;
+  }
+  </style>
   </head>
   <body class="body colour1">
     <!-- <script src="..\script\toggle.js"></script> -->
@@ -162,12 +167,14 @@
         >
           BEGIN !!
         </button>
+        <p style="font-weight:bold; color: red; font-size: 1.1em;">Please select all the domains you are interested in!</p>
       </div>
     </div>
 
     <!-- <button class="toggle right" onclick="toggle()">Toggle</button> -->
 
     <!-- Compiled and minified JavaScript -->
+    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
     <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
     <script>
@@ -181,8 +188,17 @@
           }
         }
           if(f==0){
-            
+          if(e.value=="competitive"){
+            console.log(e.value);
+            swal({
+            title: "Note:",
+            text: "There will be no quiz for the competitive section. An invite will be sent to you for the same in your registered e-mails.",
+            icon: "info",
+            button: "Ok",
+            });
+          }
           domain.push(e.value);
+          console.log(domain)
           e.style.background = "#333333";
           e.style.color="#faa41a";
           e.innerHTML="Selected";
@@ -192,6 +208,7 @@
           else{
             index=domain.indexOf(e.value)
             domain.splice(index,1);
+            console.log(domain)
             e.style.background = "#faa41a";
             e.style.color="#333333";
             e.innerHTML="Select";
@@ -203,7 +220,16 @@
         var numOfDom = domain.length;
       console.log(numOfDom);
       if (numOfDom > 0) {
-        $.ajax({
+        swal({
+          title: "Do you want to proceed?",
+          text: "Currently, the domains selected are: "+domain+". (Once you click OK, you cannot edit the list of domains)",
+          icon: "info",
+          buttons: true,
+          dangerMode: true,
+        })
+        .then((willSend) => {
+          if (willSend) {
+            $.ajax({
           url: "/domain",
           method: "POST",
           dataType: "json",
@@ -219,9 +245,12 @@
             $("#begin").prop("disabled", false);
           }
         });
+          } 
+        });
+        
       } else {
         // $("#begin").prop("disabled", false);
-        alert("Please Select a Domain!");
+        swal("Please Select a Domain!");
       }
       }
 
