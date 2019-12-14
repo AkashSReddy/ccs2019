@@ -25,6 +25,8 @@ router.post(
 
 
 router.get("/register", (req, res) => {
+  req.logout();
+  return res.render("closed")
   res.render("register", { message: "" });
 });
 
@@ -71,54 +73,57 @@ router.get("/register", (req, res) => {
 
 //Register with recaptcha
 
-router.post("/register", async (req, res, next) => {
-  console.log(req.body)
-  const options = {
-    method: "POST",
-    uri: "https://www.google.com/recaptcha/api/siteverify",
-    formData: {
-      secret: process.env.RECAPTCHA_SECRET,
-      response: req.body["g-recaptcha-response"]
-    }
-  };
-  request(options)
-    .then(response => {
-      let cResponse = JSON.parse(response);
-      if (!cResponse.success) {
-        return res.render("register", { message: "Invalid Captcha" });
-      }
-      return userFunctions
-        .addUser(req.body)
-        .then(function (message) {
-          if (message === "ok") return res.render("index", { message: "ok" });
-          return res.render("index", { message: message });
-        })
-        .catch(err => {
-          console.log(err);
-          next(err);
-        });
-    })
-    .catch(err => next(err));
-});
+// router.post("/register", async (req, res, next) => {
+//   req.logout();
+//   return res.redirect("/thanks")
+//   console.log(req.body)
+//   const options = {
+//     method: "POST",
+//     uri: "https://www.google.com/recaptcha/api/siteverify",
+//     formData: {
+//       secret: process.env.RECAPTCHA_SECRET,
+//       response: req.body["g-recaptcha-response"]
+//     }
+//   };
+//   request(options)
+//     .then(response => {
+//       let cResponse = JSON.parse(response);
+//       if (!cResponse.success) {
+//         return res.render("register", { message: "Invalid Captcha" });
+//       }
+//       return userFunctions
+//         .addUser(req.body)
+//         .then(function (message) {
+//           if (message === "ok") return res.render("index", { message: "ok" });
+//           return res.render("index", { message: message });
+//         })
+//         .catch(err => {
+//           console.log(err);
+//           next(err);
+//         });
+//     })
+//     .catch(err => next(err));
+// });
 
 //Register without recaptcha
 
-// router.post("/register", async (req, res, next) => {
-//   try {
-//     let message = await userFunctions.addUser(req.body);
-//     // console.log(req.body);
-//     console.log(message)
-//     if (message === "ok") return res.render("index", { message: "ok" });
-//     return res.render("index", { message: message });
-//   } catch (err) {
-//     next(err);
-//   }
-// });
+router.post("/register", async (req, res, next) => {
+  try {
+    req.logout();
+    return res.render("closed")
+    let message = await userFunctions.addUser(req.body);
+    // console.log(req.body);
+    console.log(message)
+    if (message === "ok") return res.render("index", { message: "ok" });
+    return res.render("index", { message: message });
+  } catch (err) {
+    next(err);
+  }
+});
 
 router.get("/user-role", auth.isLoggedIn, (req, res, next) => {
   try {
     console.log("entered user-role");
-
     if (req.user.role === "admin") {
       return res.redirect("/admin");
     }
@@ -160,6 +165,8 @@ router.get(
   auth.isUser,
   auth.isAttempt,
   async (req, res, next) => {
+    req.logout();
+    return res.render("closed")
     res.render("instructions", { user: req.user });
   }
 );
@@ -187,6 +194,8 @@ router.get(
 
 router.get("/domain", auth.isUser, auth.isAttempt, async (req, res, next) => {
   try {
+    req.logout();
+    return res.render("closed")
     return res.render("domains", { user: req.user })
   } catch (error) {
     return next(error)
@@ -195,6 +204,8 @@ router.get("/domain", auth.isUser, auth.isAttempt, async (req, res, next) => {
 
 router.post("/domain", auth.isUser, auth.isAttempt, async (req, res, next) => {
   try {
+    req.logout();
+    return res.render("closed")
     var startTime = Date.now();
     var domain = req.body.domain;
     var compete = false;
@@ -222,8 +233,9 @@ router.post("/domain", auth.isUser, auth.isAttempt, async (req, res, next) => {
 
 router.get("/question", auth.isUser, auth.isAttempt, async (req, res, next) => {
   try {
+    req.logout();
+    return res.render("closed")
     var stuff = await userService.setQuestions(req.user.id);
-
     let questions = stuff.map(question => {
       return {
         questionId: question._id,
@@ -247,6 +259,8 @@ router.get("/question", auth.isUser, auth.isAttempt, async (req, res, next) => {
 
 router.post("/question", auth.isUser, auth.isSubmit, async (req, res, next) => {
   try {
+    req.logout();
+    return res.render("closed")
     const solutions = req.body.solutions;
     console.log(solutions);
     var endTime = Date.now();
